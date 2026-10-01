@@ -1,0 +1,361 @@
+{
+  "type": "json_schema",
+  "name": "studychat_epistemic_ownership_coding_v1_0",
+  "description": "Structured coding of observable Direction, Integration, and Evaluation in StudyChat student-AI conversations using Codebook v1.0.",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "schema_version": {
+        "type": "string",
+        "enum": [
+          "1.0"
+        ],
+        "description": "Version of the coding schema."
+      },
+      "case_id": {
+        "type": "string",
+        "description": "Unique conversation identifier supplied in the input."
+      },
+      "semester": {
+        "type": "string",
+        "enum": [
+          "F24",
+          "S25"
+        ],
+        "description": "Semester of the conversation."
+      },
+      "assignment": {
+        "type": "string",
+        "enum": [
+          "a1",
+          "a2",
+          "a3",
+          "a4",
+          "a5",
+          "a6",
+          "a7"
+        ],
+        "description": "Course assignment associated with the conversation."
+      },
+      "episodes": {
+        "type": "array",
+        "description": "Local sequences organized around relatively stable subproblems, artifacts, or goals.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "episode_id": {
+              "type": "string",
+              "description": "Episode identifier, e.g. E1, E2."
+            },
+            "episode_goal": {
+              "type": "string",
+              "description": "Concise description of the local goal of the episode."
+            },
+            "turn_ids": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "description": "Student turn IDs assigned to this episode."
+            },
+            "episode_trajectory": {
+              "type": "string",
+              "description": "Brief sequential description of the episode without assigning a global Epistemic Ownership score."
+            }
+          },
+          "required": [
+            "episode_id",
+            "episode_goal",
+            "turn_ids",
+            "episode_trajectory"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "turn_codings": {
+        "type": "array",
+        "description": "One coding record for every student turn in the conversation.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "turn_id": {
+              "type": "integer",
+              "description": "Student turn number in the supplied transcript."
+            },
+            "episode_id": {
+              "type": "string",
+              "description": "Episode to which the student turn belongs."
+            },
+			"functional_move": {
+				"type": "array",
+				"items": {
+					"type": "string",
+					"enum": [
+					"initiates",
+					"specifies",
+					"adds_context",
+					"implementation_request",
+					"conceptual_question",
+					"applies",
+					"accepts_selectively",
+					"inspects",
+					"questions",
+					"corrects",
+					"rejects",
+					"extends",
+					"redirects",
+					"resets",
+					"terminates",
+					"integrates/reuses",
+					"requests_verification",
+					"reports_failure",
+					"proposes_diagnostic_candidate",
+					"tests",
+					"acknowledges",
+					"representation_translation"
+					]
+				},
+  "description": "Functional description(s) of what the student is doing. Use only Codebook v1.0 values. Use an empty array when no listed functional move can be defensibly assigned."
+},
+            "relation_to_prior": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "new",
+                  "continues",
+                  "applies_prior_AI",
+                  "transforms_prior_AI",
+                  "challenges",
+                  "corrects",
+                  "re-ask/unresolved",
+                  "evidence_escalation",
+                  "task_reset"
+                ]
+              },
+              "description": "Relation of the student move to prior interaction. More than one value may apply."
+            },
+            "direction": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "description": "1 only when the student observably governs the cognitive/task goal, assistance, procedure, artifact, decision, constraint, workflow state, or trajectory."
+            },
+            "integration": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "description": "1 only when there is observable uptake of a prior AI contribution through incorporation, application, transformation, reuse, selective adoption, or transfer."
+            },
+            "evaluation": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "description": "1 only when the student observably participates in judgment through inspection, comparison, challenge, criterion application, testing, diagnosis, correction, rejection, or interpretation."
+            },
+            "target": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "format/presentation",
+                  "communicative_fit",
+                  "data_representation/schema",
+                  "artifact",
+                  "implementation/tool",
+                  "procedure",
+                  "result",
+                  "concept/model",
+                  "architecture/system",
+                  "delegation/scope",
+                  "workflow_state/artifact_lineage"
+                ]
+              },
+              "description": "Object(s) or aspect(s) toward which the coded behavior is directed. Use an empty array when none is applicable."
+            },
+            "reference_basis": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "assignment_instructions",
+                  "prior_AI_output",
+                  "own_artifact/code",
+                  "prior_procedure",
+                  "own/domain_knowledge",
+                  "runtime_feedback",
+                  "observed_behavior",
+                  "expected_result",
+				  "communicative_intention",
+				  "supplied_mapping/query",
+				  "supplied_data/corpus"
+                ]
+              },
+              "description": "Observable basis or bases on which the student action relies. Use an empty array when none is applicable."
+            },
+            "validation_mode": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "inspection",
+                  "instruction_comparison",
+                  "conceptual_reasoning",
+                  "execution",
+                  "external_result",
+                  "static_analysis/IDE_feedback"
+                ]
+              },
+              "description": "Mode(s) through which evaluation or checking becomes observable."
+            },
+            "diagnostic_contribution": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "report",
+                  "locate",
+                  "hypothesize",
+                  "test",
+                  "revise"
+                ]
+              },
+              "description": "Student contribution to diagnosis. Use 'none' when no diagnostic contribution is observable."
+            },
+            "content_provenance": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "student-generated",
+                  "assignment-provided",
+                  "AI-derived",
+                  "runtime/environment",
+                  "external/unclear"
+                ]
+              },
+              "description": "Origin(s) of content, instruction, hypothesis, or material used in the student move."
+            },
+            "criterion_provenance": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "student-generated",
+                  "assignment-provided",
+                  "AI-derived",
+                  "runtime/environment",
+                  "external/unclear"
+                ]
+              },
+              "description": "Origin(s) of the criterion used for evaluation. Use an empty array when no evaluation criterion is involved."
+            },
+            "judgment_provenance": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "student-generated",
+                  "assignment-provided",
+                  "AI-derived",
+                  "runtime/environment",
+                  "external/unclear"
+                ]
+              },
+              "description": "Source(s) of the judgment. For observable student Evaluation, student-generated should normally be present."
+            },
+            "evidence": {
+              "type": "array",
+              "description": "Evidence entries for every positive Direction, Integration, or Evaluation code. Leave empty when D=I=E=0.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dimension": {
+                    "type": "string",
+                    "enum": [
+                      "direction",
+                      "integration",
+                      "evaluation"
+                    ],
+                    "description": "Dimension supported by this evidence."
+                  },
+                  "evidence_type": {
+                    "type": "string",
+                    "enum": [
+                      "explicit",
+                      "inferable"
+                    ],
+                    "description": "Whether the evidence is directly visible or conservatively inferable from a sufficiently specific sequence."
+                  },
+                  "evidence_quote": {
+                    "type": "string",
+                    "description": "Shortest sufficient verbatim quote from the student turn. Do not reconstruct or paraphrase."
+                  }
+                },
+                "required": [
+                  "dimension",
+                  "evidence_type",
+                  "evidence_quote"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "ambiguity_note": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Concise note about plausible alternative interpretations or limits of inference. Null when no material ambiguity is present."
+            }
+          },
+          "required": [
+            "turn_id",
+            "episode_id",
+            "functional_move",
+            "relation_to_prior",
+            "direction",
+            "integration",
+            "evaluation",
+            "target",
+            "reference_basis",
+            "validation_mode",
+            "diagnostic_contribution",
+            "content_provenance",
+            "criterion_provenance",
+            "judgment_provenance",
+            "evidence",
+            "ambiguity_note"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "conversation_trajectory": {
+        "type": "string",
+        "description": "Concise narrative of how delegation, human re-entry, Direction, Integration, and Evaluation unfold across the conversation. Do not provide an overall Epistemic Ownership score or rating."
+      }
+    },
+    "required": [
+      "schema_version",
+      "case_id",
+      "semester",
+      "assignment",
+      "episodes",
+      "turn_codings",
+      "conversation_trajectory"
+    ],
+    "additionalProperties": false
+  }
+}

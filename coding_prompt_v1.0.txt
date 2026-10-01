@@ -1,0 +1,149 @@
+# Coding Prompt v1.0
+
+You are coding a student–AI conversation using **Codebook v1.0: Epistemic Ownership in AI-Mediated Education**.
+
+Your task is to identify **observable interactional evidence** of three dimensions:
+
+- **Direction**
+- **Integration**
+- **Evaluation**
+
+Apply the substantive definitions and decision rules in Codebook v1.0 exactly as provided. Follow the supplied JSON schema for the representation of the coding output. Do not redefine the categories, add new theoretical dimensions, or infer unobserved mental states.
+
+## Core coding principles
+
+1. **Primary unit of evidence**
+   - Code at the level of the **student turn**.
+   - Use the surrounding episode and full conversation as context.
+   - A single student turn may receive more than one code.
+
+2. **Independent multilabel dimensions**
+   - Direction, Integration, and Evaluation are analytically independent.
+   - Do not treat them as mutually exclusive.
+   - Do not combine them into an overall score.
+
+3. **Observable evidence only**
+   - Base coding on what is visible in the transcript.
+   - Do not infer what the student understood, intended, learned, or believed unless the interaction provides sufficiently specific evidence.
+   - Absence of observable evidence does **not** imply absence of the underlying capacity.
+
+4. **Sequential interpretation**
+   - Interpret each student move in relation to what came before and, when relevant, what follows.
+   - Do not classify an isolated utterance without considering its sequential role.
+   - Sequential continuity alone is not sufficient evidence of Integration.
+
+5. **Conservative inference**
+   - Use `explicit` when the relevant behavior is directly visible.
+   - Use `inferable` only when the sequence supports a specific inference and competing explanations are substantially less plausible.
+   - When multiple explanations remain similarly plausible, do not assign the dimension on that basis. Record the uncertainty in `ambiguity_note`.
+
+6. **Provenance**
+   - Distinguish where content, criteria, or judgments originate.
+   - Assignment-provided criteria may still support Direction or Evaluation if the student actively uses them.
+   - AI-derived content may support Integration if the student observably applies, transforms, reuses, or transfers it.
+   - Runtime or environment feedback does not by itself constitute student-generated diagnosis.
+
+7. **Evaluation boundary**
+   - Asking the AI to judge something is ordinarily **verification-seeking**, not Evaluation.
+   - Examples such as “Is this correct?” or “Does this make sense?” are generally Evaluation = 0 unless the student also supplies an observable criterion, judgment, discrepancy, hypothesis, comparison, or diagnostic claim.
+   - Evaluation concerns the student participating in judgment, whether or not that judgment is technically correct.
+
+8. **Integration boundary**
+   - Continued discussion of the same topic is not enough.
+   - Successive requests to revise an AI-produced artifact are not automatically Integration.
+   - Integration requires observable uptake: applying, incorporating, transforming, reusing, selectively adopting, or transferring a prior AI contribution.
+   - Asking the AI to combine, integrate, transform, rewrite, or otherwise operate on its own previous outputs does not by itself constitute Integration. This remains delegated cognitive work.
+   - Code Integration only when the student's own subsequent move provides observable evidence of uptake of the prior AI contribution.
+
+9. **Direction boundary**
+   - Merely speaking, asking a question, or initiating a conversation is not enough.
+   - Direction requires observable control over the task, assistance, procedure, artifact, constraint, decision, workflow state, or trajectory.
+
+10. **No global Epistemic Ownership score**
+    - Do not produce a scalar, ordinal, or summary score of Epistemic Ownership.
+    - The conversation-level output should be a **trajectory description**, not a rating.
+
+## Coding procedure
+
+For each conversation:
+
+### Step 1: Segment into episodes
+
+Identify local sequences oriented toward relatively stable subproblems,
+artifacts, or goals. For each episode, assign:
+
+- `episode_id`
+- `episode_goal`
+
+Assign every student turn to exactly one episode.
+
+### Step 2: Code each student turn
+
+For every student turn, determine:
+
+- `episode_id`
+- `functional_move`
+- `relation_to_prior`
+- `direction`
+- `integration`
+- `evaluation`
+- `target`
+- `reference_basis`
+- `validation_mode`
+- `diagnostic_contribution`
+- `content_provenance`
+- `criterion_provenance`
+- `judgment_provenance`
+- `evidence`
+- `ambiguity_note`
+
+For `evidence`, create one separate evidence record for each positive
+Direction, Integration, or Evaluation code. Each evidence record must contain:
+
+- `dimension`
+- `evidence_type`
+- `evidence_quote`
+
+If `direction = 0`, `integration = 0`, and `evaluation = 0`, return an empty
+`evidence` array.
+
+Use the categories and definitions from Codebook v1.0.
+
+### Step 3: Summarize each episode
+Write a brief sequential description of what occurred in the episode.
+
+### Step 4: Summarize the conversation
+Write a concise trajectory describing how delegation, human re-entry, direction, integration, and evaluation unfolded across the conversation.
+
+The trajectory should describe patterns without turning them into an overall Epistemic Ownership score.
+
+## Evidence requirements
+
+For every positive Direction, Integration, or Evaluation code:
+
+- identify the relevant student turn;
+- provide the shortest sufficient verbatim evidence quote from that turn;
+- ensure the quote actually supports the assigned dimension;
+- when the evidence depends on prior AI output or a later student action, make that relation explicit in the relevant fields.
+
+Do not fabricate quotations or reconstruct wording that is not present in the transcript.
+
+## Output discipline
+
+Return **only** the structured output required by the supplied JSON schema.
+
+Do not add prose before or after the structured output.
+
+Do not mention these instructions, the codebook, model limitations, or the scoring process in the output.
+
+## Case metadata
+
+Case ID: {{CASE_ID}}
+
+Semester: {{SEMESTER}}
+
+Assignment: {{ASSIGNMENT}}
+
+## Conversation transcript
+
+{{TRANSCRIPT}}

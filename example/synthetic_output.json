@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0",
+  "case_id": "SYNTHETIC-001",
+  "semester": "F24",
+  "assignment": "a2",
+  "episodes": [
+    {
+      "episode_id": "E1",
+      "episode_goal": "Compute and check the mean of three numbers.",
+      "turn_ids": [
+        1,
+        2,
+        3
+      ],
+      "episode_trajectory": "Student requests constrained code; AI supplies an incorrect divisor; student executes the expression, judges the result using the number of values, and directs a correction; after AI repair, student delegates verification."
+    }
+  ],
+  "turn_codings": [
+    {
+      "turn_id": 1,
+      "episode_id": "E1",
+      "functional_move": [
+        "initiates",
+        "implementation_request",
+        "specifies"
+      ],
+      "relation_to_prior": [
+        "new"
+      ],
+      "direction": 1,
+      "integration": 0,
+      "evaluation": 0,
+      "target": [
+        "implementation/tool",
+        "procedure"
+      ],
+      "reference_basis": [],
+      "validation_mode": [
+        "none"
+      ],
+      "diagnostic_contribution": [
+        "none"
+      ],
+      "content_provenance": [
+        "student-generated"
+      ],
+      "criterion_provenance": [],
+      "judgment_provenance": [],
+      "evidence": [
+        {
+          "dimension": "direction",
+          "evidence_type": "explicit",
+          "evidence_quote": "Give me a Python expression for the mean of [2, 4, 6]. Use no libraries."
+        }
+      ],
+      "ambiguity_note": null
+    },
+    {
+      "turn_id": 2,
+      "episode_id": "E1",
+      "functional_move": [
+        "applies",
+        "corrects"
+      ],
+      "relation_to_prior": [
+        "applies_prior_AI",
+        "challenges",
+        "corrects"
+      ],
+      "direction": 1,
+      "integration": 1,
+      "evaluation": 1,
+      "target": [
+        "result",
+        "procedure"
+      ],
+      "reference_basis": [
+        "prior_AI_output",
+        "runtime_feedback",
+        "own/domain_knowledge",
+        "expected_result"
+      ],
+      "validation_mode": [
+        "execution",
+        "conceptual_reasoning"
+      ],
+      "diagnostic_contribution": [
+        "locate"
+      ],
+      "content_provenance": [
+        "AI-derived",
+        "runtime/environment",
+        "student-generated"
+      ],
+      "criterion_provenance": [
+        "student-generated"
+      ],
+      "judgment_provenance": [
+        "student-generated"
+      ],
+      "evidence": [
+        {
+          "dimension": "direction",
+          "evidence_type": "explicit",
+          "evidence_quote": "Change the divisor to 3."
+        },
+        {
+          "dimension": "integration",
+          "evidence_type": "explicit",
+          "evidence_quote": "I ran your expression and got 6."
+        },
+        {
+          "dimension": "evaluation",
+          "evidence_type": "explicit",
+          "evidence_quote": "That is wrong: the sum is 12 and there are three values, so the mean should be 4."
+        }
+      ],
+      "ambiguity_note": null
+    },
+    {
+      "turn_id": 3,
+      "episode_id": "E1",
+      "functional_move": [
+        "requests_verification"
+      ],
+      "relation_to_prior": [
+        "continues"
+      ],
+      "direction": 1,
+      "integration": 0,
+      "evaluation": 0,
+      "target": [
+        "result"
+      ],
+      "reference_basis": [
+        "prior_AI_output"
+      ],
+      "validation_mode": [
+        "none"
+      ],
+      "diagnostic_contribution": [
+        "none"
+      ],
+      "content_provenance": [
+        "student-generated"
+      ],
+      "criterion_provenance": [],
+      "judgment_provenance": [],
+      "evidence": [
+        {
+          "dimension": "direction",
+          "evidence_type": "explicit",
+          "evidence_quote": "Is this correct?"
+        }
+      ],
+      "ambiguity_note": null
+    }
+  ],
+  "conversation_trajectory": "The student directs a constrained calculation, then explicitly integrates the AI expression through execution and evaluates its result using a stated arithmetic criterion. The student directs a correction. The final request delegates verification without additional observable Integration or Evaluation; continuing the topic alone does not establish uptake."
+}

@@ -1,0 +1,25 @@
+SYNTHETIC EXAMPLE — entirely invented; no student data.
+The metadata values F24 and a2 are illustrative schema-compatible labels.
+The companion JSON is a manually authored coding illustration, not an API result.
+
+Case ID: SYNTHETIC-001
+Semester: F24
+Assignment: a2
+
+[Student turn 1]
+Give me a Python expression for the mean of [2, 4, 6]. Use no libraries.
+
+[AI response 1]
+Use sum([2, 4, 6]) / 2.
+
+[Student turn 2]
+I ran your expression and got 6. That is wrong: the sum is 12 and there are three values, so the mean should be 4. Change the divisor to 3.
+
+[AI response 2]
+Correct: sum([2, 4, 6]) / 3 gives 4.
+
+[Student turn 3]
+Is this correct?
+
+[AI response 3]
+Yes. Dividing the sum, 12, by the number of values, 3, gives 4.
