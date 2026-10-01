@@ -40,6 +40,6 @@ The substantive codebook is reproduced without its closing non-operational edito
 
 ## Citation
 
-Fábrega, J. (2026). *Same Performance, Different Process: Epistemic Ownership in AI-Mediated Education*. WAILS 2026 manuscript.
+Fábrega, J. (2026). *Same Performance, Different Process: Epistemic Ownership in AI-Mediated Education*. WAILS 2026 - 3rd Workshop on Artificial Intelligence with and for Learning Sciences. Manuscript. 
 
 This reference will be updated when the final proceedings citation and DOI are available. No proceedings DOI is asserted here.
